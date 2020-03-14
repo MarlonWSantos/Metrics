@@ -23,51 +23,31 @@ public class FirstTests extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		stage.setTitle("Scatter Chart Sample");
-		final NumberAxis xAxis = new NumberAxis(0, 10, 1);
-		final NumberAxis yAxis = new NumberAxis(-100, 500, 100);
+		stage.setTitle("Network Density");
+		final NumberAxis xAxis = new NumberAxis(0, 100, 5);
+		final NumberAxis yAxis = new NumberAxis(0, 100, 5);
 		ScatterChart<Number, Number> sc = new ScatterChart<Number, Number>(xAxis, yAxis);
-		xAxis.setLabel("Age (years)");
-		yAxis.setLabel("Returns to date");
-		sc.setTitle("Investment Overview");
+		xAxis.setLabel("X axis");
+		yAxis.setLabel("Y axis");
+		sc.setTitle("Network Density");
 		sc.setPrefSize(500, 400);
 		Scene scene = new Scene(new Group());
 
-		//Graphic graphic = new Graphic();
-		//graphic.createSerie();
-		//graphic.setCoordinatesSeries1(5.5,5.5);
-		//sc.getData().addAll(graphic.getCoordinateSeries1());
-		/*sc.getData().add(graphic.getCoordinateSeries2());
+		Graphic graphic = new Graphic();
+		graphic.createSerie();
+		graphic.setCoordinatesSeries1(10.5,20.2);
+		graphic.setCoordinatesSeries2(30.5,30.5);
+		graphic.setCoordinatesSeries3(50.5,50.5);
+		graphic.setCoordinatesSeries4(70.4,70.4);
+		graphic.setCoordinatesSeries5(80.5,80.3);
+		graphic.setCoordinatesSeries6(90.9,90.0);
+
+		sc.getData().add(graphic.getCoordinateSeries1());
+		sc.getData().add(graphic.getCoordinateSeries2());
 		sc.getData().add(graphic.getCoordinateSeries3());
 		sc.getData().add(graphic.getCoordinateSeries4());
 		sc.getData().add(graphic.getCoordinateSeries5());
-		sc.getData().add(graphic.getCoordinateSeries6());*/
-
-		XYChart.Series<Number, Number> series1 = new XYChart.Series<>();
-		XYChart.Series<Number, Number> series2 = new XYChart.Series<>();
-
-
-		series1.setName("Cluster 1");
-		series2.setName("Cluster 2");
-
-		series1.getData().add(new XYChart.Data<>(4.2, 193.2));
-		series2.getData().add(new XYChart.Data<>(2.8, 33.6));
-		series1.getData().add(new XYChart.Data<>(6.2, 24.8));
-		series2.getData().add(new XYChart.Data<>(1, 14));
-		series1.getData().add(new XYChart.Data<>(1.2, 26.4));
-		series2.getData().add(new XYChart.Data<>(4.4, 114.4));
-		series1.getData().add(new XYChart.Data<>(8.5, 323));
-		series2.getData().add(new XYChart.Data<>(6.9, 289.8));
-		series1.getData().add(new XYChart.Data<>(9.9, 287.1));
-		series2.getData().add(new XYChart.Data<>(0.9, -9));
-		series1.getData().add(new XYChart.Data<>(3.2, 150.8));
-		series2.getData().add(new XYChart.Data<>(4.8, 20.8));
-		series1.getData().add(new XYChart.Data<>(7.3, -42.3));
-		series2.getData().add(new XYChart.Data<>(1.8, 81.4));
-		series1.getData().add(new XYChart.Data<>(7.3, 110.3));
-		series2.getData().add(new XYChart.Data<>(2.7, 41.2));
-
-		sc.getData().addAll(series1,series2);
+		sc.getData().add(graphic.getCoordinateSeries6());
 
 		((Group) scene.getRoot()).getChildren().add(sc);
 		stage.setScene(scene);
