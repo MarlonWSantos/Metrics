@@ -23,12 +23,12 @@ public class Graphic {
 		series5 = new XYChart.Series<>();
 		series6 = new XYChart.Series<>();
 
-		series1.setName("Cluster 1");
-		series2.setName("Cluster 2");
-		series3.setName("Cluster 3");
-		series4.setName("Cluster 4");
-		series5.setName("Cluster 5");
-		series6.setName("Cluster 6");
+		series1.setName("Cluster 1  ");
+		series2.setName("Cluster 2  ");
+		series3.setName("Cluster 3  ");
+		series4.setName("Cluster 4  ");
+		series5.setName("Cluster 5  ");
+		series6.setName("Cluster 6  ");
 
 
 	}
