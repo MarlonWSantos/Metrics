@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
 import weka.clusterers.SimpleKMeans;
 import weka.core.Instances;
 import weka.core.converters.CSVLoader;
@@ -41,17 +45,41 @@ public class Cluster {
 	}
 
 
+	public static ArrayList<ArrayList<String>> convertCSV2Array() throws FileNotFoundException {
+		ArrayList<ArrayList<String>> dataFromFile=new ArrayList<ArrayList<String>>();
+	     try{
+	         Scanner scanner=new Scanner(new FileReader("/home/marlon/motes_coordinates.csv"));
+	         scanner.useDelimiter(";");
+
+	         while(scanner.hasNext())
+	         {
+	            String dataInRow=scanner.nextLine();
+	            String []dataInRowArray=dataInRow.split(";");
+	            ArrayList<String> rowDataFromFile=new ArrayList<String>(Arrays.asList(dataInRowArray));
+	            dataFromFile.add(rowDataFromFile);
+	         }
+	         scanner.close();
+	     }catch (FileNotFoundException e){
+	        e.printStackTrace();
+	     }
+	     return dataFromFile;
+	}  
+
+
+
 	public static void main(String[] args) throws Exception {
 		SimpleKMeans kmeans = new SimpleKMeans();
 		kmeans.setSeed(10);
 		//important parameter to set: preserver order, number of cluster.
 		kmeans.setPreserveInstancesOrder(true);
 		kmeans.setNumClusters(3);
-		
+
+		System.out.println(convertCSV2Array());
+
 		loadCSV();
-		
+
 		saveARFF();
-		
+
 		BufferedReader datafile = readDataFile("/tmp/.motes_coordinates.arff");
 
 		Instances data = new Instances(datafile);
