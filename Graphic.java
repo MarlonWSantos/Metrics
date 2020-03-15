@@ -12,8 +12,6 @@ public class Graphic {
 	private XYChart.Series<Number, Number> series4;
 	private XYChart.Series<Number, Number> series5;
 	private XYChart.Series<Number, Number> series6;
-	private XYChart.Series<Number, Number> AllSeries;
-
 
 	public void createSerie() {
 		series1 = new XYChart.Series<>();
