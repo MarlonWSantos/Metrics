@@ -6,6 +6,7 @@ import javafx.scene.chart.XYChart.Series;
 
 public class Graphic {
 	
+	private XYChart.Series<Number, Number> series0;
 	private XYChart.Series<Number, Number> series1;
 	private XYChart.Series<Number, Number> series2;
 	private XYChart.Series<Number, Number> series3;
@@ -14,12 +15,15 @@ public class Graphic {
 	private XYChart.Series<Number, Number> series6;
 
 	public void createSerie() {
+		series0 = new XYChart.Series<>();
 		series1 = new XYChart.Series<>();
 		series2 = new XYChart.Series<>();
 		series3 = new XYChart.Series<>();
 		series4 = new XYChart.Series<>();
 		series5 = new XYChart.Series<>();
 		series6 = new XYChart.Series<>();
+
+		series0.setName("Cluster 0  ");
 
 		series1.setName("Cluster 1  ");
 		series2.setName("Cluster 2  ");
@@ -29,6 +33,10 @@ public class Graphic {
 		series6.setName("Cluster 6  ");
 
 
+	}
+	
+	public void setCoordinatesSeries0(double X,double Y) {
+		series0.getData().add(new XYChart.Data<>(X, Y));
 	}
 	
 	public void setCoordinatesSeries1(double X,double Y) {
@@ -53,6 +61,10 @@ public class Graphic {
 	
 	public void setCoordinatesSeries6(double X,double Y) {
 		series6.getData().add(new XYChart.Data<>(X, Y));
+	}
+	
+	public XYChart.Series<Number, Number> getCoordinateSeries0() {
+		return this.series0;
 	}
 	
 	public XYChart.Series<Number, Number> getCoordinateSeries1() {
