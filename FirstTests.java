@@ -34,21 +34,13 @@ public class FirstTests extends Application {
 		Scene scene = new Scene(new Group());
 
 		Graphic graphic = new Graphic();
-/*		graphic.createSerie();
-		graphic.setCoordinatesSeries1(10.5,20.2);
-		graphic.setCoordinatesSeries1(11.5,20.2);
-		graphic.setCoordinatesSeries1(12.5,20.2);
-
-		graphic.setCoordinatesSeries2(30.5,30.5);
-		graphic.setCoordinatesSeries2(31.5,30.5);
-		graphic.setCoordinatesSeries2(30.5,31.5);
-		graphic.setCoordinatesSeries2(32.5,32.5);
-
-		graphic.setCoordinatesSeries3(50.5,50.5);
-		graphic.setCoordinatesSeries4(70.4,70.4);
-		graphic.setCoordinatesSeries5(80.5,80.3);
-		graphic.setCoordinatesSeries6(90.9,90.0);
-*/
+		Cluster cluster = new Cluster();
+		
+		graphic.createSerie();
+		
+		cluster.readCSVInsertSeries(graphic);
+		
+		sc.getData().add(graphic.getCoordinateSeries0());
 		sc.getData().add(graphic.getCoordinateSeries1());
 		sc.getData().add(graphic.getCoordinateSeries2());
 		sc.getData().add(graphic.getCoordinateSeries3());
