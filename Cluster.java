@@ -17,8 +17,11 @@ import java.io.File;
 public class Cluster {
 
 	private static Instances data;
+	final static String PATH_CSV_FILE = "/home/marlon/motes_coordinates.csv";
+	final static String PATH_ARFF_FILE = "/tmp/.motes_coordinates.arff";
 
-	public static BufferedReader readDataFile(String filename) {
+
+	public BufferedReader readDataFile(String filename) {
 		BufferedReader inputReader = null;
 
 		try {
@@ -30,89 +33,72 @@ public class Cluster {
 		return inputReader;
 	}
 
-	public static void loadCSV() throws IOException {
+	public void loadCSV() throws IOException {
 		CSVLoader loader = new CSVLoader();
-		loader.setSource(new File("/home/marlon/motes_coordinates.csv"));
+		loader.setSource(new File(PATH_CSV_FILE));
 		data = loader.getDataSet();
 	}
 
-	public static void saveARFF() throws IOException {
+	public void saveARFF() throws IOException {
 		ArffSaver saver = new ArffSaver();
 		saver.setInstances(data);
-		saver.setFile(new File("/tmp/.motes_coordinates.arff"));
-		saver.setDestination(new File("/tmp/.motes_coordinates.arff"));
+		saver.setFile(new File(PATH_ARFF_FILE));
+		saver.setDestination(new File(PATH_ARFF_FILE));
 		saver.writeBatch();
 	}
 
+	public ArrayList<ArrayList<String>> convertCSV2Array() throws FileNotFoundException {
 
-	public static ArrayList<ArrayList<String>> convertCSV2Array() throws FileNotFoundException {
 		ArrayList<ArrayList<String>> dataFromFile=new ArrayList<ArrayList<String>>();
-	     try{
-	         Scanner scanner=new Scanner(new FileReader("/home/marlon/motes_coordinates.csv"));
-	         scanner.useDelimiter(";");
 
-	         while(scanner.hasNext())
-	         {
-	            String dataInRow=scanner.nextLine();
-	            String []dataInRowArray=dataInRow.split(";");
-	            ArrayList<String> rowDataFromFile=new ArrayList<String>(Arrays.asList(dataInRowArray));
-	            dataFromFile.add(rowDataFromFile);
-	         }
-	         scanner.close();
-	     }catch (FileNotFoundException e){
-	        e.printStackTrace();
-	     }
-	     return dataFromFile;
-	}  
+		try{
+			Scanner scanner=new Scanner(new FileReader(PATH_CSV_FILE));
+			scanner.useDelimiter(",");
 
+			while(scanner.hasNext())
+			{
+				String line=scanner.nextLine();
+				String []dataLineInArray=line.split(",");
+				ArrayList<String> rowDataFromFile=new ArrayList<String>(Arrays.asList(dataLineInArray));
+				dataFromFile.add(rowDataFromFile);
+			}
+			scanner.close();
+		}catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
+		return dataFromFile;
+	}
 
+	public void readCSVInsertSeries(Graphic grap) throws FileNotFoundException  {
 
-	public static void main(String[] args) throws Exception {
+		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
+
+		list = convertCSV2Array();
+
+		for (int i=1;i<list.size();i++) {
+			grap.setCoordinatesSeries0(Double.parseDouble(list.get(i).get(1)),Double.parseDouble(list.get(i).get(2)));
+		}
+	}
+	
+	public void createClusters() throws Exception {
+		
 		SimpleKMeans kmeans = new SimpleKMeans();
+		
 		kmeans.setSeed(10);
-		//important parameter to set: preserver order, number of cluster.
 		kmeans.setPreserveInstancesOrder(true);
 		kmeans.setNumClusters(3);
 
-		System.out.println(convertCSV2Array());
-
-		loadCSV();
-
-		saveARFF();
-
-		BufferedReader datafile = readDataFile("/tmp/.motes_coordinates.arff");
-
+		BufferedReader datafile = readDataFile(PATH_ARFF_FILE);
 		Instances data = new Instances(datafile);
-		System.out.println(data);
+		
 		kmeans.buildClusterer(data);
-		// This array returns the cluster number (starting with 0) for each instance
-		// The array has as many elements as the number of instances
+		
 		int[] assignments = kmeans.getAssignments();
 
 		int i=0;
 		for(int clusterNum : assignments) {
-			Graphic grap = new Graphic();
-			grap.createSerie();
 			System.out.printf("Instance %d -> Cluster %d \n", i, clusterNum);
-			/*if(clusterNum == 0) {
-				grap.setCoordinatesSeries1(1.1,1.1);
-			}
-			if(clusterNum == 1) {
-				grap.setCoordinatesSeries2(5.5,5.5);
-			}
-			if(clusterNum == 2) {
-				grap.setCoordinatesSeries3(9.5,10.5);
-			}
-			if(clusterNum == 3) {
-				grap.setCoordinatesSeries4(10.1,10.1);
-			}
-			if(clusterNum == 4) {
-				//grap.setCoordinatesSeries5();
-			}
-			if(clusterNum == 5) {
-				//grap.setCoordinatesSeries6();
-			}	*/
 			i++;
 		}
-	}
+	}	
 }
