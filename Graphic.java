@@ -20,15 +20,12 @@ public class Graphic {
 	}
 	
 	public void createSerie() {
-		series0 = new XYChart.Series<>();
 		series1 = new XYChart.Series<>();
 		series2 = new XYChart.Series<>();
 		series3 = new XYChart.Series<>();
 		series4 = new XYChart.Series<>();
 		series5 = new XYChart.Series<>();
 		series6 = new XYChart.Series<>();
-
-		series0.setName("Network ");
 
 		series1.setName("Cluster 1  ");
 		series2.setName("Cluster 2  ");
