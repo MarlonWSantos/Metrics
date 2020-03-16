@@ -23,7 +23,6 @@ public class Cluster {
 
 	public BufferedReader readDataFile(String filename) {
 		BufferedReader inputReader = null;
-		Integer.toHexString(10);
 		try {
 			inputReader = new BufferedReader(new FileReader(filename));
 
