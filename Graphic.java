@@ -14,6 +14,11 @@ public class Graphic {
 	private XYChart.Series<Number, Number> series5;
 	private XYChart.Series<Number, Number> series6;
 
+	public void createSerieNetwork() {
+		series0 = new XYChart.Series<>();
+		series0.setName("Network ");
+	}
+	
 	public void createSerie() {
 		series0 = new XYChart.Series<>();
 		series1 = new XYChart.Series<>();
@@ -23,7 +28,7 @@ public class Graphic {
 		series5 = new XYChart.Series<>();
 		series6 = new XYChart.Series<>();
 
-		series0.setName("Cluster 0  ");
+		series0.setName("Network ");
 
 		series1.setName("Cluster 1  ");
 		series2.setName("Cluster 2  ");

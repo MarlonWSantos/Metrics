@@ -17,13 +17,13 @@ import java.io.File;
 public class Cluster {
 
 	private static Instances data;
-	final static String PATH_CSV_FILE = "/home/marlon/motes_coordinates.csv";
+	final static String PATH_CSV_FILE = "/tmp/motes_coordinates.csv";
 	final static String PATH_ARFF_FILE = "/tmp/.motes_coordinates.arff";
 
 
 	public BufferedReader readDataFile(String filename) {
 		BufferedReader inputReader = null;
-
+		Integer.toHexString(10);
 		try {
 			inputReader = new BufferedReader(new FileReader(filename));
 
