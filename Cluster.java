@@ -30,8 +30,7 @@ public class Cluster {
 
 	static String[]  IPs = {"[aaaa::200:0:0:2]","[aaaa::200:0:0:3]","[aaaa::200:0:0:4]","[aaaa::200:0:0:5]","[aaaa::200:0:0:6]","[aaaa::200:0:0:7]","[aaaa::200:0:0:8]","[aaaa::200:0:0:9]","[aaaa::200:0:0:17]","[aaaa::200:0:0:25]","[aaaa::200:0:0:29]","[aaaa::200:0:0:1c]","[aaaa::200:0:0:a]","[aaaa::200:0:0:f]","[aaaa::200:0:0:1a]","[aaaa::200:0:0:17]","[aaaa::200:0:0:1f]"};
 
-
-
+/******************************************************************************/	
 	public void convertCSV2Array() throws FileNotFoundException {
 
 		dataFromFile=new ArrayList<ArrayList<String>>();
@@ -51,9 +50,8 @@ public class Cluster {
 		}catch (FileNotFoundException e){
 			e.printStackTrace();
 		}
-
 	}
-
+/******************************************************************************/
 	public void readEndAddressFindData( ) throws FileNotFoundException  {
 		int posicao=0;
 		motesActives=new ArrayList<ArrayList<String>>();
@@ -71,7 +69,7 @@ public class Cluster {
 			}
 		}
 	}
-
+/******************************************************************************/
 	public void savingActivesMotesInCSV() throws IOException {
 		BufferedWriter br = new BufferedWriter(new FileWriter(PATH_CSV_FILE_ACTIVES));
 		StringBuilder sb = new StringBuilder();
@@ -87,13 +85,13 @@ public class Cluster {
 		br.write(sb.toString());
 		br.close();
 	}
-	/********************************************************************************/	
+/******************************************************************************/	
 	public void loadCSV() throws IOException {
 		CSVLoader loader = new CSVLoader();
 		loader.setSource(new File(PATH_CSV_FILE_ACTIVES));
 		data = loader.getDataSet();
 	}
-
+/******************************************************************************/
 	public void saveARFF() throws IOException {
 		ArffSaver saver = new ArffSaver();
 		saver.setInstances(data);
@@ -101,20 +99,17 @@ public class Cluster {
 		saver.setDestination(new File(PATH_ARFF_FILE));
 		saver.writeBatch();
 	}
-	/********************************************************************************/	
+/********************************************************************************/	
 	public void createClusters() throws Exception {
 
 		SimpleKMeans kmeans = new SimpleKMeans();
 
-		//Graphic graphic = new Graphic();
-		
 		graphic.createSerieCluster1();
 		graphic.createSerieCluster2();
 		graphic.createSerieCluster3();
 		graphic.createSerieCluster4();
 		graphic.createSerieCluster5();
 		graphic.createSerieCluster6();
-
 
 		kmeans.setSeed(10);
 		kmeans.setPreserveInstancesOrder(true);
@@ -133,7 +128,7 @@ public class Cluster {
 		for(int clusterNum : assignments) {
 			System.out.printf("Instance %d -> Cluster %d \n", i, clusterNum);
 			System.out.println(motesActives.get(mote));
-			
+
 			coordX=Double.parseDouble(motesActives.get(mote).get(1));
 			coordY=Double.parseDouble(motesActives.get(mote).get(2));
 
@@ -159,12 +154,11 @@ public class Cluster {
 				graphic.setCoordinatesSeries6(coordX, coordY);
 				break;			
 			}
-
 			i++;
 			mote++;
 		}
 	}
-
+/******************************************************************************/
 	public BufferedReader readDataFile(String filename) {
 		BufferedReader inputReader = null;
 		try {
@@ -174,35 +168,5 @@ public class Cluster {
 			System.err.println("File not found: " + filename);
 		}
 		return inputReader;
-	}
-
-	public static void main(String []args) throws FileNotFoundException {
-		Cluster obj = new Cluster();
-		
-		//Graphic grap = new Graphic();
-
-
-		try {
-			obj.convertCSV2Array();
-			obj.readEndAddressFindData();
-			obj.savingActivesMotesInCSV();
-			obj.loadCSV();
-			obj.saveARFF();
-			obj.createClusters();
-			
-			System.out.println(graphic.getCoordinateSeries1());
-			System.out.println(graphic.getCoordinateSeries2());
-			System.out.println(graphic.getCoordinateSeries3());
-			System.out.println(graphic.getCoordinateSeries4());
-			System.out.println(graphic.getCoordinateSeries5());
-			System.out.println(graphic.getCoordinateSeries6());
-
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 }
