@@ -6,7 +6,6 @@ import javafx.scene.chart.XYChart.Series;
 
 public class Graphic {
 	
-	private XYChart.Series<Number, Number> series0;
 	private XYChart.Series<Number, Number> series1;
 	private XYChart.Series<Number, Number> series2;
 	private XYChart.Series<Number, Number> series3;
@@ -14,31 +13,34 @@ public class Graphic {
 	private XYChart.Series<Number, Number> series5;
 	private XYChart.Series<Number, Number> series6;
 
-	public void createSerieNetwork() {
-		series0 = new XYChart.Series<>();
-		series0.setName("Network ");
-	}
-	
-	public void createSerie() {
+	public void createSerieCluster1() {
 		series1 = new XYChart.Series<>();
-		series2 = new XYChart.Series<>();
-		series3 = new XYChart.Series<>();
-		series4 = new XYChart.Series<>();
-		series5 = new XYChart.Series<>();
-		series6 = new XYChart.Series<>();
-
-		series1.setName("Cluster 1  ");
-		series2.setName("Cluster 2  ");
-		series3.setName("Cluster 3  ");
-		series4.setName("Cluster 4  ");
-		series5.setName("Cluster 5  ");
-		series6.setName("Cluster 6  ");
-
-
+		series1.setName("Cluster 1 ");
 	}
 	
-	public void setCoordinatesSeries0(double X,double Y) {
-		series0.getData().add(new XYChart.Data<>(X, Y));
+	public void createSerieCluster2() {
+		series2 = new XYChart.Series<>();
+		series2.setName("Cluster 2 ");
+	}
+	
+	public void createSerieCluster3() {
+		series3 = new XYChart.Series<>();
+		series3.setName("Cluster 3 ");
+	}
+	
+	public void createSerieCluster4() {
+		series4 = new XYChart.Series<>();
+		series4.setName("Cluster 4 ");
+	}
+	
+	public void createSerieCluster5() {
+		series5 = new XYChart.Series<>();
+		series5.setName("Cluster 5 ");
+	}
+	
+	public void createSerieCluster6() {
+		series6 = new XYChart.Series<>();
+		series6.setName("Cluster 6 ");
 	}
 	
 	public void setCoordinatesSeries1(double X,double Y) {
@@ -65,31 +67,28 @@ public class Graphic {
 		series6.getData().add(new XYChart.Data<>(X, Y));
 	}
 	
-	public XYChart.Series<Number, Number> getCoordinateSeries0() {
-		return this.series0;
-	}
 	
 	public XYChart.Series<Number, Number> getCoordinateSeries1() {
-		return this.series1;
+		return series1;
 	}
 	
 	public XYChart.Series<Number, Number> getCoordinateSeries2() {
-		return this.series2;
+		return series2;
 	}
 	
 	public XYChart.Series<Number, Number> getCoordinateSeries3() {
-		return this.series3;
+		return series3;
 	}
 	
 	public XYChart.Series<Number, Number> getCoordinateSeries4() {
-		return this.series4;
+		return series4;
 	}
 	
 	public XYChart.Series<Number, Number> getCoordinateSeries5() {
-		return this.series5;
+		return series5;
 	}
 	
 	public XYChart.Series<Number, Number> getCoordinateSeries6() {
-		return this.series6;
+		return series6;
 	}
 }
